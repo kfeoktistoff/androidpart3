@@ -44,16 +44,16 @@ public class DownloadImageActivity extends Activity {
             public void run() {
                 final Uri imageLocalUri = DownloadUtils.downloadImage(DownloadImageActivity.this, uri);
 
+                if (imageLocalUri != null) {
+                    DownloadImageActivity.this.setResult(RESULT_OK,
+                            DownloadImageActivity.this.getIntent().putExtra(MainActivity.IMAGE_PATH_CODE, imageLocalUri.toString())
+                    );
+                } else {
+                    DownloadImageActivity.this.setResult(RESULT_CANCELED);
+                }
+
                 DownloadImageActivity.this.runOnUiThread(new Runnable() {
                     public void run() {
-                        if (imageLocalUri != null) {
-                            DownloadImageActivity.this.setResult(RESULT_OK,
-                                    DownloadImageActivity.this.getIntent().putExtra(MainActivity.IMAGE_PATH_CODE, imageLocalUri.toString())
-                            );
-                        } else {
-                            DownloadImageActivity.this.setResult(RESULT_CANCELED);
-                        }
-
                         DownloadImageActivity.this.finish();
                     }
                 });
