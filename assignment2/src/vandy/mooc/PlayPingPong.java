@@ -19,7 +19,7 @@ public class PlayPingPong implements Runnable {
      */
     private enum PingPong {
         PING, PONG
-    };
+    }
 
     /**
      * Number of iterations to run the ping-pong algorithm.
@@ -35,15 +35,15 @@ public class PlayPingPong implements Runnable {
      * Define a pair of Handlers used to send/handle Messages via the
      * HandlerThreads.
      */
-    Handler pingHandler;
-    Handler pongHandler;
+    private Handler pingHandler;
+    private Handler pongHandler;
 
     /**
      * Define a CyclicBarrier synchronizer that ensures the
      * HandlerThreads are fully initialized before the ping-pong
      * algorithm begins.
      */
-    CyclicBarrier cyclicBarrier = new CyclicBarrier(2);
+    private CyclicBarrier cyclicBarrier = new CyclicBarrier(PingPong.values().length);
 
     /**
      * Implements the concurrent ping/pong algorithm using a pair of
